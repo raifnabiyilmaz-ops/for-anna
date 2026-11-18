@@ -1,5 +1,5 @@
 // =====================================================
-//  Anna – page behaviour
+//  ANNUSHKA – page behaviour
 // =====================================================
 const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
