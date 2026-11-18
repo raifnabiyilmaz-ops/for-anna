@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Anna</title>
+  <meta name="theme-color" content="#121a2e">
+
+  <!-- Fonts (Google Fonts – free) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <!-- Lets the CSS know JavaScript is running (used for scroll reveals) -->
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+
+  <!-- Cinematic opening: a short navy fade -->
+  <div class="intro" aria-hidden="true"><span class="intro-mark">A</span></div>
+
+  <!-- Fine film grain over the whole page -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- City silhouettes, drawn once and reused below -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="skyline" viewBox="0 0 1440 320">
+      <g fill="currentColor">
+        <!-- ISTANBUL: mosque with minarets -->
+        <path d="M0 300 C60 280 120 286 170 290 L330 290 C400 284 460 292 560 296 L560 300 Z"/>
+        <rect x="96" y="176" width="5" height="124"/><polygon points="96,176 98.5,146 101,176"/><rect x="93" y="206" width="11" height="3"/>
+        <rect x="399" y="176" width="5" height="124"/><polygon points="399,176 401.5,146 404,176"/><rect x="396" y="206" width="11" height="3"/>
+        <rect x="128" y="150" width="6" height="150"/><polygon points="128,150 131,112 134,150"/><rect x="124.5" y="186" width="13" height="3"/><rect x="124.5" y="222" width="13" height="3"/>
+        <rect x="366" y="150" width="6" height="150"/><polygon points="366,150 369,112 372,150"/><rect x="362.5" y="186" width="13" height="3"/><rect x="362.5" y="222" width="13" height="3"/>
+        <rect x="150" y="256" width="200" height="44"/>
+        <path d="M160 258 A30 30 0 0 1 220 258 Z"/><path d="M280 258 A30 30 0 0 1 340 258 Z"/>
+        <path d="M188 244 A62 62 0 0 1 312 244 Z"/><rect x="186" y="244" width="128" height="14"/>
+        <rect x="248.5" y="166" width="3" height="18"/><circle cx="250" cy="164" r="3"/>
+        <path d="M148 262 A12 12 0 0 1 172 262 Z"/><path d="M328 262 A12 12 0 0 1 352 262 Z"/>
+        <!-- ISTANBUL: Galata Tower -->
+        <rect x="498" y="196" width="32" height="104"/><rect x="492" y="184" width="44" height="12"/>
+        <polygon points="494,184 514,138 534,184"/><rect x="512.8" y="124" width="2.4" height="16"/>
+        <!-- Bridge between the two cities -->
+        <rect x="610" y="196" width="7" height="104"/><rect x="823" y="196" width="7" height="104"/>
+        <rect x="560" y="268" width="320" height="4"/>
+        <!-- SAINT PETERSBURG: Peter and Paul Cathedral -->
+        <rect x="940" y="240" width="76" height="60"/><rect x="962" y="182" width="32" height="58"/>
+        <rect x="967" y="150" width="22" height="32"/><rect x="971" y="128" width="14" height="22"/>
+        <polygon points="972,128 978,30 984,128"/><rect x="977" y="18" width="2" height="14"/><rect x="972" y="22" width="12" height="2"/>
+        <!-- SAINT PETERSBURG: Winter Palace -->
+        <rect x="1036" y="252" width="180" height="48"/><rect x="1030" y="246" width="192" height="6"/>
+        <rect x="1110" y="236" width="32" height="12"/><path d="M1110 236 L1126 226 L1142 236 Z"/>
+        <!-- SAINT PETERSBURG: Church of the Savior on Blood -->
+        <rect x="1250" y="230" width="96" height="70"/><rect x="1288" y="164" width="20" height="66"/>
+        <path d="M1286 166 C1280 150 1298 140 1298 124 C1298 140 1316 150 1310 166 Z"/>
+        <rect x="1297" y="108" width="2" height="16"/><rect x="1293" y="113" width="10" height="2"/>
+        <rect x="1258" y="206" width="16" height="24"/><path d="M1256 208 C1252 197 1266 190 1266 180 C1266 190 1280 197 1276 208 Z"/><rect x="1265" y="170" width="2" height="10"/>
+        <rect x="1322" y="206" width="16" height="24"/><path d="M1320 208 C1316 197 1330 190 1330 180 C1330 190 1344 197 1340 208 Z"/><rect x="1329" y="170" width="2" height="10"/>
+        <!-- SAINT PETERSBURG: Admiralty spire -->
+        <rect x="1376" y="220" width="40" height="80"/><rect x="1386" y="196" width="20" height="24"/>
+        <polygon points="1391,196 1396,104 1401,196"/>
+        <rect x="880" y="292" width="560" height="8"/>
+      </g>
+      <g fill="none" stroke="currentColor">
+        <path d="M560 270 L613 198 Q720 268 826 198 L880 270" stroke-width="2"/>
+        <path d="M640 236 V268 M670 252 V268 M700 260 V268 M740 260 V268 M770 252 V268 M800 236 V268" stroke-width="1"/>
+        <path d="M60 308 H300 M420 314 H620 M700 308 H980 M1060 314 H1380" stroke-width="1" opacity=".6"/>
+      </g>
+    </symbol>
+  </svg>
+
+  <!-- ========== TOP BAR ========== -->
+  <header class="topbar">
+    <span class="monogram">A&thinsp;·&thinsp;P&thinsp;·&thinsp;F</span>
+
+    <!-- Music on/off. Nothing plays until this is pressed. -->
+    <button id="musicBtn" class="music-btn" type="button" aria-pressed="false">
+      <span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="music-label">Music <b id="musicState">Off</b></span>
+    </button>
+  </header>
+
+  <main>
+
+    <!-- ========== HERO ========== -->
+    <section class="hero">
+      <svg class="hero-skyline" aria-hidden="true" preserveAspectRatio="xMidYMax meet"><use href="#skyline"/></svg>
+
+      <div class="hero-text">
+        <p class="eyebrow" data-reveal>Istanbul <span class="dash"></span> Saint Petersburg</p>
+        <h1 class="title" data-reveal>
+          <span class="title-hello">Hello,</span>
+          <span class="title-name">Anna Pelipchuk Federovna</span>
+        </h1>
+        <p class="lede" data-reveal>
+          A small page, made with care, for someone who turns ordinary days into
+          something worth remembering.
+        </p>
+        <a class="scroll-cue" href="#favourites" data-reveal>
+          <span>Scroll</span><i aria-hidden="true"></i>
+        </a>
+      </div>
+
+      <figure class="photo" data-reveal>
+        <div class="photo-tilt" id="photoTilt">
+          <div class="photo-frame">
+            <img id="photo" src="anna-yeni.jpg"
+                 alt="Anna and her partner above the Bosphorus in Istanbul">
+            <div class="photo-light" aria-hidden="true"></div>
+            <div class="photo-vignette" aria-hidden="true"></div>
+          </div>
+        </div>
+        <figcaption><span>Plate I</span> The Bosphorus, Istanbul</figcaption>
+      </figure>
+    </section>
+
+    <!-- ========== HOUSE FAVOURITES ========== -->
+    <section class="favourites" id="favourites">
+      <p class="eyebrow center" data-reveal>The house favourites</p>
+      <h2 class="section-title" data-reveal>Curated for Anna</h2>
+
+      <div class="menu">
+        <article class="menu-item" data-reveal>
+          <svg class="menu-icon" viewBox="0 0 48 48" aria-hidden="true">
+            <path d="M14 10h18v28a4 4 0 0 1-4 4h-10a4 4 0 0 1-4-4z"/>
+            <path d="M32 16h4a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4h-4"/>
+            <path d="M14 15c3-3 6 1 9-1s6-2 9 1"/>
+            <circle cx="20" cy="24" r=".8"/><circle cx="25" cy="30" r=".8"/><circle cx="21" cy="34" r=".8"/>
+          </svg>
+          <span class="menu-no">No. 01</span>
+          <h3>Non-Alcoholic Beer</h3>
+          <p>All of the ceremony, none of the regret. Raise a glass — clear-headed and entirely charming.</p>
+        </article>
+
+        <article class="menu-item" data-reveal>
+          <svg class="menu-icon" viewBox="0 0 48 48" aria-hidden="true">
+            <path d="M8 24h32a16 14 0 0 1-32 0z"/>
+            <path d="M13 22c1-5 6-8 9-6M21 21c2-6 8-8 11-4M29 22c2-3 6-3 7 0"/>
+            <path d="M18 40h12"/>
+          </svg>
+          <span class="menu-no">No. 02</span>
+          <h3>Protein Chips</h3>
+          <p>A crunch with a conscience. Indulgent enough to share, disciplined enough not to.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ========== THE SURPRISE ========== -->
+    <section class="finale">
+      <p class="eyebrow center light" data-reveal>One more thing</p>
+      <h2 class="section-title light" data-reveal>And now, the main course</h2>
+
+      <div class="gift-stage" id="giftStage">
+        <div class="gift-glow" aria-hidden="true"></div>
+
+        <div class="gift" aria-hidden="true">
+          <!-- Pasta pieces wait inside the box -->
+          <div class="pasta">
+            <!-- a nest of tagliatelle with two basil leaves -->
+            <svg class="nest" viewBox="0 0 160 110">
+              <use href="#nestRibbons" class="nest-outline"/>
+              <g class="nest-ribbons" id="nestRibbons">
+                <ellipse cx="80" cy="64" rx="62" ry="30" transform="rotate(-6 80 64)"/>
+                <ellipse cx="80" cy="60" rx="52" ry="34" transform="rotate(14 80 60)"/>
+                <ellipse cx="80" cy="62" rx="58" ry="22" transform="rotate(22 80 62)"/>
+                <ellipse cx="80" cy="58" rx="42" ry="30" transform="rotate(-24 80 58)"/>
+                <ellipse cx="80" cy="60" rx="30" ry="22" transform="rotate(8 80 60)"/>
+                <ellipse cx="80" cy="60" rx="16" ry="12" transform="rotate(-12 80 60)"/>
+              </g>
+              <path class="leaf" d="M84 30 C92 14 112 12 118 16 C112 28 98 34 84 30 Z"/>
+              <path class="leaf" d="M82 30 C76 16 60 10 54 14 C58 26 70 32 82 30 Z"/>
+              <path class="leaf-vein" d="M86 29 L112 18 M80 29 L60 16"/>
+            </svg>
+            <svg class="piece" style="--tx:-112px;--ty:-170px;--r:-18deg;--d:.25s" viewBox="0 0 60 60"><use href="#farfalle"/></svg>
+            <svg class="piece" style="--tx:-58px;--ty:-252px;--r:22deg;--d:.35s" viewBox="0 0 60 60"><use href="#penne"/></svg>
+            <svg class="piece" style="--tx:54px;--ty:-262px;--r:-14deg;--d:.45s" viewBox="0 0 60 60"><use href="#fusilli"/></svg>
+            <svg class="piece" style="--tx:116px;--ty:-180px;--r:16deg;--d:.55s" viewBox="0 0 60 60"><use href="#farfalle"/></svg>
+            <svg class="piece" style="--tx:-122px;--ty:-112px;--r:-38deg;--d:.62s" viewBox="0 0 60 60"><use href="#penne"/></svg>
+            <svg class="piece" style="--tx:124px;--ty:-108px;--r:30deg;--d:.7s" viewBox="0 0 60 60"><use href="#fusilli"/></svg>
+          </div>
+
+          <div class="gift-base"></div>
+
+          <div class="gift-lid">
+            <svg class="bow" viewBox="0 0 120 60">
+              <path d="M60 46 C40 20 14 18 16 34 C18 48 44 48 60 46 Z"/>
+              <path d="M60 46 C80 20 106 18 104 34 C102 48 76 48 60 46 Z"/>
+              <path d="M56 46 L44 60 M64 46 L76 60" stroke-width="3" fill="none"/>
+              <ellipse cx="60" cy="46" rx="7" ry="6"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pasta drawings (used by the pieces above) -->
+      <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <symbol id="farfalle" viewBox="-30 -30 60 60">
+          <path class="pf" d="M-3 -3 L-24 -15 C-28 -5 -28 5 -24 15 L-3 3 Z M3 -3 L24 -15 C28 -5 28 5 24 15 L3 3 Z"/>
+          <path class="pl" d="M-20 -11 C-22 -4 -22 4 -20 11 M-15 -8 C-16 -3 -16 3 -15 8 M20 -11 C22 -4 22 4 20 11 M15 -8 C16 -3 16 3 15 8"/>
+          <ellipse class="pf" cx="0" cy="0" rx="4.5" ry="6.5"/>
+        </symbol>
+        <symbol id="penne" viewBox="-30 -30 60 60">
+          <path class="pf" d="M-8 -21 L8 -27 L8 21 L-8 27 Z"/>
+          <path class="pl" d="M-4 -22.5 V25.5 M0 -24 V24 M4 -25.5 V22.5"/>
+        </symbol>
+        <symbol id="fusilli" viewBox="-30 -30 60 60">
+          <rect class="pf" x="-7" y="-25" width="14" height="50" rx="7"/>
+          <path class="pl" d="M-7 -16 L7 -23 M-7 -7 L7 -14 M-7 2 L7 -5 M-7 11 L7 4 M-7 20 L7 13"/>
+        </symbol>
+      </svg>
+
+      <button id="pressBtn" class="press-btn" type="button">
+        <span>PRESS HERE</span>
+      </button>
+
+      <div class="gift-label" id="giftLabel" aria-live="polite">
+        <span class="label-kicker">Chef’s selection</span>
+        <p class="label-name">Gluten-Free Pasta</p>
+        <span class="label-note">Served with love — and absolutely no gluten.</span>
+      </div>
+
+      <svg class="finale-skyline" aria-hidden="true" preserveAspectRatio="xMidYMax meet"><use href="#skyline"/></svg>
+
+      <footer class="footer">Istanbul <span>·</span> Saint Petersburg</footer>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
