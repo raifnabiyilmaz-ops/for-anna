@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>For ANNUSHKA</title>
-  <meta name="theme-color" content="#121a2e">
+  <meta name="theme-color" content="#651f35">
 
   <!-- Fonts (Google Fonts – free) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,7 +17,7 @@
 </head>
 <body>
 
-  <!-- Cinematic opening: a short navy fade -->
+  <!-- Cinematic opening: a short burgundy fade -->
   <div class="intro" aria-hidden="true"><span class="intro-mark">A</span></div>
 
   <!-- Fine film grain over the whole page -->
@@ -25,6 +25,11 @@
 
   <!-- City silhouettes, drawn once and reused below -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <!-- slight pencil wobble for the hand-drawn dogs -->
+    <filter id="dogSketch" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="2" seed="7" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
     <symbol id="skyline" viewBox="0 0 1440 320">
       <g fill="currentColor">
         <!-- ISTANBUL: mosque with minarets -->
@@ -72,20 +77,44 @@
 
   <!-- ========== TOP BAR ========== -->
   <header class="topbar">
-    <span class="monogram">A&thinsp;·&thinsp;P&thinsp;·&thinsp;F</span>
+    <span class="monogram">ANNUSHKA</span>
 
-    <!-- Music on/off. Nothing plays until this is pressed. -->
-    <button id="musicBtn" class="music-btn" type="button" aria-pressed="false">
+    <!-- Music player: RetRet – tries to start quietly (20%) on load -->
+    <div class="player" id="player" role="group" aria-label="Music player">
+      <button id="playBtn" class="player-btn player-play" type="button" aria-label="Play music" aria-pressed="false">
+        <svg class="icon-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg>
+        <svg class="icon-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 3h3v10H4zM9 3h3v10H9z"/></svg>
+      </button>
       <span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
-      <span class="music-label">Music <b id="musicState">Off</b></span>
-    </button>
+      <span class="player-meta">
+        <span class="player-artist">RetRet</span>
+        <span class="player-state" id="playerState" aria-live="polite">Paused</span>
+      </span>
+      <button id="muteBtn" class="player-btn" type="button" aria-label="Mute music" aria-pressed="false">
+        <svg class="icon-sound" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6h2.5L8 3v10L4.5 10H2z"/><path d="M10.5 5.2a3.6 3.6 0 0 1 0 5.6M12.2 3.6a6 6 0 0 1 0 8.8" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        <svg class="icon-muted" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6h2.5L8 3v10L4.5 10H2z"/><path d="M10.5 6l4 4M14.5 6l-4 4" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      </button>
+      <input id="volume" class="player-volume" type="range" min="0" max="100" step="1" value="20" aria-label="Music volume">
+    </div>
+    <audio id="bgMusic" src="retret-song.mp3" preload="auto" loop></audio>
   </header>
+
+  <!-- Shown only if the browser blocks autoplay -->
+  <div class="music-prompt" id="musicPrompt" hidden>
+    <button class="prompt-play" id="promptPlay" type="button">
+      <span class="prompt-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4.5 2.8v10.4L13 8z"/></svg></span>
+      <span>Play Music</span>
+      <small>RetRet</small>
+    </button>
+    <button class="prompt-close" id="promptClose" type="button" aria-label="Dismiss music invitation">&times;</button>
+  </div>
 
   <main>
 
     <!-- ========== HERO ========== -->
     <section class="hero">
       <svg class="hero-skyline" aria-hidden="true" preserveAspectRatio="xMidYMax meet"><use href="#skyline"/></svg>
+      <div class="dog dog--hero dog--extra" data-dog aria-hidden="true"></div>
 
       <div class="hero-text">
         <p class="eyebrow" data-reveal>Istanbul <span class="dash"></span> Saint Petersburg</p>
@@ -93,7 +122,7 @@
           <span class="title-hello">Hello,</span>
           <span class="title-name">ANNUSHKA</span>
         </h1>
-        <p class="lede" data-reveal>
+        <p class="lede" data-reveal="blur">
           A small page, made with care, for someone who turns ordinary days into
           something worth remembering.
         </p>
@@ -103,25 +132,39 @@
       </div>
 
       <figure class="photo" data-reveal>
-        <div class="photo-tilt" id="photoTilt">
+        <div class="photo-tilt">
           <div class="photo-frame">
-            <img id="photo" src="anna-yeni.jpg"
-                 alt="ANNUSHKA and her partner above the Bosphorus in Istanbul">
-            <div class="photo-light" aria-hidden="true"></div>
-            <div class="photo-vignette" aria-hidden="true"></div>
+            <img id="photo" src="anna-yeni.jpg" width="1028" height="1530"
+                 alt="ANNUSHKA and her partner standing together by the water">
           </div>
         </div>
         <figcaption><span>Plate I</span> The Bosphorus, Istanbul</figcaption>
       </figure>
     </section>
 
+    <!-- Divider: a gold line draws itself; a small dog dances on it -->
+    <div class="section-divider" data-reveal-line aria-hidden="true">
+      <span class="divider-ornament"></span>
+      <div class="dog dog--divider" data-dog></div>
+    </div>
+
     <!-- ========== HOUSE FAVOURITES ========== -->
     <section class="favourites" id="favourites">
+      <!-- The heart moment: the same picture floats by briefly, then leaves -->
+      <div class="heart-moment" id="heartMoment" aria-hidden="true">
+        <div class="heart-float">
+          <div class="heart-glow"></div>
+          <div class="heart-photo"><img src="anna-yeni.jpg" alt="" decoding="async"></div>
+          <svg class="heart-outline inner" viewBox="0 0 100 100" preserveAspectRatio="none"><path pathLength="100" vector-effect="non-scaling-stroke" d="M50 92C50 92 6 62 6 33C6 17 18 6 32 6C41 6 47 11 50 18C53 11 59 6 68 6C82 6 94 17 94 33C94 62 50 92 50 92Z"/></svg>
+          <svg class="heart-outline outer" viewBox="0 0 100 100" preserveAspectRatio="none"><path pathLength="100" vector-effect="non-scaling-stroke" d="M50 92C50 92 6 62 6 33C6 17 18 6 32 6C41 6 47 11 50 18C53 11 59 6 68 6C82 6 94 17 94 33C94 62 50 92 50 92Z"/></svg>
+        </div>
+      </div>
+
       <p class="eyebrow center" data-reveal>The house favourites</p>
-      <h2 class="section-title" data-reveal>Curated for ANNUSHKA</h2>
+      <h2 class="section-title" data-reveal="blur">Curated for ANNUSHKA</h2>
 
       <div class="menu">
-        <article class="menu-item" data-reveal>
+        <article class="menu-item" data-reveal="left">
           <svg class="menu-icon" viewBox="0 0 48 48" aria-hidden="true">
             <path d="M14 10h18v28a4 4 0 0 1-4 4h-10a4 4 0 0 1-4-4z"/>
             <path d="M32 16h4a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4h-4"/>
@@ -133,7 +176,7 @@
           <p>All of the ceremony, none of the regret. Raise a glass — clear-headed and entirely charming.</p>
         </article>
 
-        <article class="menu-item" data-reveal>
+        <article class="menu-item" data-reveal="right">
           <svg class="menu-icon" viewBox="0 0 48 48" aria-hidden="true">
             <path d="M8 24h32a16 14 0 0 1-32 0z"/>
             <path d="M13 22c1-5 6-8 9-6M21 21c2-6 8-8 11-4M29 22c2-3 6-3 7 0"/>
@@ -144,12 +187,13 @@
           <p>A crunch with a conscience. Indulgent enough to share, disciplined enough not to.</p>
         </article>
       </div>
+      <div class="dog dog--menu dog--extra flip" data-dog aria-hidden="true"></div>
     </section>
 
     <!-- ========== THE SURPRISE ========== -->
     <section class="finale">
       <p class="eyebrow center light" data-reveal>One more thing</p>
-      <h2 class="section-title light" data-reveal>And now, the main course</h2>
+      <h2 class="section-title light" data-reveal="blur">And now, the main course</h2>
 
       <div class="gift-stage" id="giftStage">
         <div class="gift-glow" aria-hidden="true"></div>
@@ -221,11 +265,46 @@
       </div>
 
       <svg class="finale-skyline" aria-hidden="true" preserveAspectRatio="xMidYMax meet"><use href="#skyline"/></svg>
+      <div class="dog dog--finale flip" data-dog aria-hidden="true"></div>
 
       <footer class="footer">Istanbul <span>·</span> Saint Petersburg</footer>
     </section>
 
   </main>
+
+  <!-- One hand-drawn dog, copied into every [data-dog] spot by script.js -->
+  <template id="dogTemplate">
+    <svg class="dog-svg" viewBox="0 0 130 100" aria-hidden="true" focusable="false">
+      <g filter="url(#dogSketch)">
+        <ellipse class="dog-shadow" cx="72" cy="93" rx="40" ry="3"/>
+        <g class="dog-rear">
+          <path class="dog-fill" d="M70 47C84 44 100 46 106 54C111 62 108 72 98 74C88 76 78 74 70 72Z"/>
+          <path class="dog-spot" d="M88 51C94 48 100 52 98 58C95 62 88 60 87 56C86 54 86 52 88 51Z"/>
+          <path class="dog-line" d="M73 46.6C84 44 100 46 106 54C111 62 108 72 98 74C88 76 80 74 74 72"/>
+          <path class="dog-line" d="M98 72C100 80 99 86 98 91L104 91"/>
+          <path class="dog-line" d="M84 74C85 80 85 86 84 91L90 91"/>
+          <path class="dog-line dog-tail" d="M106 53C113 48 116 41 113 34"/>
+        </g>
+        <g class="dog-front">
+          <path class="dog-fill" d="M40 50C48 45 64 45 80 47L80 71C66 73 52 73 44 70C36 66 35 56 40 50Z"/>
+          <path class="dog-line" d="M41 49C49 45 64 45 78 47"/>
+          <path class="dog-line" d="M78 71C66 73 52 73 44 70C38 66 36 58 40 51"/>
+          <path class="dog-line" d="M50 70C49 77 49 84 48 91L54 91"/>
+          <path class="dog-line" d="M62 72C62 79 62 85 62 91L68 91"/>
+          <path class="dog-collar" d="M36 43C39 47.5 43 49.5 47 48.5"/>
+          <circle class="dog-tag" cx="42" cy="50.5" r="2.1"/>
+          <g class="dog-head">
+            <path class="dog-fill" d="M44 34C44 24 36 18 28 19C21 20 17 25 17 30L9 33C6 34 6 39 9 40L18 42C22 47 30 48 36 46C41 44 44 40 44 34Z"/>
+            <path class="dog-ear" d="M33 21C39 17 46 21 45 29C44 35 41 39 38 37C36 32 35 27 33 21Z"/>
+            <circle class="dog-ink" cx="8.2" cy="36" r="2.2"/>
+            <circle class="dog-ink" cx="26" cy="29" r="1.7"/>
+            <ellipse class="dog-blush" cx="24" cy="36.5" rx="3" ry="1.6"/>
+            <path class="dog-line thin" d="M12 41C15 43.5 18 43.5 20.5 41"/>
+          </g>
+        </g>
+      </g>
+    </svg>
+  </template>
 
   <script src="script.js"></script>
 </body>
